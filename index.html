@@ -1,85 +1,128 @@
 <html>
     <body>
-        <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <h1>Will you be my valentine?</h1>
-            <img id="valentineImage" src="images\valentines1.jpg" alt="Valentine's Day Image" style="max-width: 300px; height: auto;">
-            <br/>
-            <br/>
-            <br/>
-            <button id="yesButton">Yes</button>
-            <button id="no">No</button>
+        <div class="content">
+            <!-- Main text asking the question -->
+            <h1>Will you be my Valentine?</h1>
+            <!-- Valentine's Day image -->
+            <img id="valentineImage" src="images/valentines1.jpg" alt="Valentine's Day Image">
+            <div class="buttons">
+                <!-- Yes and No buttons -->
+                <button id="yesButton">Yes</button>
+                <button id="noButton">No</button>
+            </div>
         </div>
 
         <style>
+            /* Body styling with a gradient background */
             body {
+                margin: 0;
+                height: 100vh; /* Full screen height */
+                display: flex; /* Flexbox for centering */
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+                font-family: Arial, sans-serif;
                 background: linear-gradient(to bottom, #f5cac3, #f7ede2);
+                color: #333; /* Neutral text color for contrast */
             }
-            div {
+            /* Centered content box */
+            .content {
                 text-align: center;
-                vertical-align: middle;
+                padding: 20px;
+                border-radius: 20px; /* Rounded corners */
+                background: #fff; /* White background */
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
             }
+            /* Header styling */
             h1 {
-                color: #f01145;
+                font-size: 2.5rem; /* Larger text */
+                color: #f01145; /* Valentine's Day theme */
+                text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for pop */
             }
+            /* Image styling */
+            img {
+                max-width: 300px;
+                height: auto;
+                border-radius: 10px; /* Rounded edges */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for focus */
+                margin: 20px 0; /* Space around image */
+            }
+            /* Button container for spacing */
+            .buttons {
+                margin-top: 20px;
+            }
+            /* General button styling */
+            button {
+                border: none;
+                border-radius: 10px; /* Rounded button corners */
+                padding: 10px 20px;
+                font-size: 1.2rem;
+                cursor: pointer; /* Pointer cursor for interactivity */
+                transition: all 0.3s ease; /* Smooth hover effect */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            }
+            /* Yes button specific styling */
             #yesButton {
-                background-color: #10a205;
-                transition: transform 0.3s;
-                margin-right: 10px;
-                width: 120px;
-                font-size: 30px;
-                height: 40px;
-                color: #fff;
-                margin-left: -140px;
+                background-color: #10a205; /* Green color */
+                color: #fff; /* White text */
+                margin-right: 15px; /* Space between buttons */
             }
+            /* Yes button hover effect */
+            #yesButton:hover {
+                background-color: #0e8b04; /* Darker green */
+                transform: scale(1.1); /* Slight size increase */
+            }
+            /* No button specific styling */
             #noButton {
-                position: absolute;
-                background-color: #f01145;
-                transition: transform 0.3s;
-                margin-left: 10px;
-                width: 120px;
-                /* font-size: 30px; */
-                height: 40px;
-                color: #fff;
+                background-color: #f01145; /* Red color */
+                color: #fff; /* White text */
+                position: relative; /* Relative for dynamic positioning */
+            }
+            /* No button hover effect */
+            #noButton:hover {
+                background-color: #c00d38; /* Darker red */
+                transform: scale(1.1); /* Slight size increase */
             }
         </style>
+
         <script>
+            // Alert for the "Yes" button
             document.getElementById("yesButton").addEventListener("click", showAlert);
 
             function showAlert() {
                 alert("I love you! See you soon <3");
             }
 
+            // DOM elements
             var yesButton = document.getElementById("yesButton");
-            var no = document.getElementById("no");
+            var noButton = document.getElementById("noButton");
             var valentineImage = document.getElementById("valentineImage");
 
+            // Arrays for dynamic changes
             var noTexts = ["Are you sure?", "Please give me a chance...", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry"];
-            var imageSources = ["images\\valentines2.jpg", "images\\valentines3.jpg", "images\\valentines4.jpg", "images\\valentines5.jpg", "images\\valentines6.jpg"];
-            no.addEventListener("click", change);
+            var imageSources = ["images/valentines2.jpg", "images/valentines3.jpg", "images/valentines4.jpg", "images/valentines5.jpg", "images/valentines6.jpg"];
+
+            // Event listener for "No" button
+            noButton.addEventListener("click", change);
 
             function change() {
-                var randomIndex = Math.floor(Math.random() * noTexts.length);
-                var randomText = noTexts[randomIndex];
-                no.innerText = randomText;
+                // Randomize the button text
+                var randomText = noTexts[Math.floor(Math.random() * noTexts.length)];
+                noButton.innerText = randomText;
 
-                var i = Math.floor(Math.random() * 1000) + 1;
-                var j = Math.floor(Math.random() * 700) + 1;
-                no.style.left = i + "px";
-                no.style.top = j + "px";
+                // Randomize the button's position within the viewport
+                var randomX = Math.floor(Math.random() * window.innerWidth - noButton.offsetWidth);
+                var randomY = Math.floor(Math.random() * window.innerHeight - noButton.offsetHeight);
+                noButton.style.position = "absolute"; // Set position to absolute
+                noButton.style.left = randomX + "px"; // Random X position
+                noButton.style.top = randomY + "px"; // Random Y position
 
-                var currentWidth = yesButton.offsetWidth;
-                var currentHeight = yesButton.offsetHeight
-                yesButton.style.width = currentWidth + 30 + "px";
-                yesButton.style.height = currentHeight + 10 + "px";
+                // Resize the "Yes" button slightly
+                yesButton.style.width = yesButton.offsetWidth + 10 + "px";
+                yesButton.style.height = yesButton.offsetHeight + 5 + "px";
 
-                var randomImageIndex = Math.floor(Math.random() * imageSources.length);
-                valentineImage.src = imageSources[randomImageIndex];
+                // Randomize the image source
+                var randomImage = imageSources[Math.floor(Math.random() * imageSources.length)];
+                valentineImage.src = randomImage;
             }
         </script>
     </body>

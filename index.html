@@ -5,6 +5,7 @@
             <h1>Will you be my Valentine?</h1>
             <!-- Valentine's Day image -->
             <img id="valentineImage" src="images/valentines1.jpg" alt="Valentine's Day Image">
+            
             <div class="buttons">
                 <!-- Yes and No buttons -->
                 <button id="yesButton">Yes</button>
@@ -24,6 +25,7 @@
                 background: linear-gradient(to bottom, #f5cac3, #f7ede2);
                 color: #333; /* Neutral text color for contrast */
             }
+
             /* Centered content box */
             .content {
                 text-align: center;
@@ -32,12 +34,14 @@
                 background: #fff; /* White background */
                 box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
             }
+
             /* Header styling */
             h1 {
                 font-size: 2.5rem; /* Larger text */
                 color: #f01145; /* Valentine's Day theme */
                 text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for pop */
             }
+
             /* Image styling */
             img {
                 max-width: 300px;
@@ -46,10 +50,12 @@
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for focus */
                 margin: 20px 0; /* Space around image */
             }
+
             /* Button container for spacing */
             .buttons {
                 margin-top: 20px;
             }
+
             /* General button styling */
             button {
                 border: none;
@@ -60,23 +66,27 @@
                 transition: all 0.3s ease; /* Smooth hover effect */
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             }
+
             /* Yes button specific styling */
             #yesButton {
                 background-color: #10a205; /* Green color */
                 color: #fff; /* White text */
                 margin-right: 15px; /* Space between buttons */
             }
+
             /* Yes button hover effect */
             #yesButton:hover {
                 background-color: #0e8b04; /* Darker green */
                 transform: scale(1.1); /* Slight size increase */
             }
+
             /* No button specific styling */
             #noButton {
                 background-color: #f01145; /* Red color */
                 color: #fff; /* White text */
                 position: relative; /* Relative for dynamic positioning */
             }
+
             /* No button hover effect */
             #noButton:hover {
                 background-color: #c00d38; /* Darker red */
@@ -98,8 +108,21 @@
             var valentineImage = document.getElementById("valentineImage");
 
             // Arrays for dynamic changes
-            var noTexts = ["Are you sure?", "Please give me a chance...", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry"];
-            var imageSources = ["images/valentines2.jpg", "images/valentines3.jpg", "images/valentines4.jpg", "images/valentines5.jpg", "images/valentines6.jpg"];
+            var noTexts = [
+                "Are you sure?", 
+                "Please give me a chance...", 
+                "Pookie please", 
+                "Don't do this to me :(", 
+                "You're breaking my heart", 
+                "I'm gonna cry"
+            ];
+            var imageSources = [
+                "images/valentines2.jpg", 
+                "images/valentines3.jpg", 
+                "images/valentines4.jpg", 
+                "images/valentines5.jpg", 
+                "images/valentines6.jpg"
+            ];
 
             // Event listener for "No" button
             noButton.addEventListener("click", change);
@@ -117,8 +140,19 @@
                 noButton.style.top = randomY + "px"; // Random Y position
 
                 // Resize the "Yes" button slightly
-                yesButton.style.width = yesButton.offsetWidth + 10 + "px";
-                yesButton.style.height = yesButton.offsetHeight + 5 + "px";
+                var currentWidth = yesButton.offsetWidth;
+                var currentHeight = yesButton.offsetHeight;
+
+                // Increase button size
+                var newWidth = currentWidth + 50;
+                var newHeight = currentHeight + 20;
+                yesButton.style.width = newWidth + "px";
+                yesButton.style.height = newHeight + "px";
+
+                // Scale the font size proportionally with the button size
+                var currentFontSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+                var widthScale = newWidth / currentWidth;
+                yesButton.style.fontSize = (currentFontSize * widthScale) + "px";
 
                 // Randomize the image source
                 var randomImage = imageSources[Math.floor(Math.random() * imageSources.length)];
